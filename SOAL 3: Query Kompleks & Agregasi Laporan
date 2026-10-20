@@ -1,0 +1,8 @@
+SELECT
+    k.nama_kategori,
+    COUNT(a.id_artikel) AS total_artikel,
+    SUM(a.jumlah_view)  AS total_view
+FROM artikel a
+JOIN kategori k ON a.id_kategori = k.id_kategori
+WHERE a.status = 'terbit'
+GROUP BY k.nama_kategori;
