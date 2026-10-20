@@ -1,0 +1,29 @@
+INSERT INTO kategori (nama_kategori) VALUES
+    ('Politik'),
+    ('Teknologi'),
+    ('Olahraga');
+ 
+INSERT INTO users (nama_lengkap, email, role) VALUES
+    ('Ryan Budiman', 'ryan@portalberita.id', 'reporter'),
+    ('Lily Santoso', 'lily@portalberita.id', 'editor'),
+    ('Sofia Geraldi', 'sofias@portalberita.id', 'reporter');
+ 
+INSERT INTO artikel (judul, isi, status, jumlah_view, tanggal_terbit, id_kategori, id_user) VALUES
+    ('Korupsi Dana BNPB',
+     'Korupsi Dana bantuan Karhutla yang Dilakukan oleh Anggota BNPB.',
+     'terbit', 1500, '2026-10-15', 1, 1),
+    ('Perkembangan Kecerdasan Buatan di Indonesia',
+     'Adopsi AI di sektor industri meningkat pesat tahun ini.',
+     'draft', 0, NULL, 2, 2),
+    ('Karhutla Kian Memburuk',
+     'Cakupan Wilayah Dari Karhutla Masih Sangat Luas.',
+     'terbit', 800, '2026-10-05', 1, 3);
+
+SELECT * FROM kategori;
+UPDATE artikel
+SET status = 'terbit',
+    tanggal_terbit = '2026-10-10'
+WHERE id_artikel = 2;
+
+DELETE FROM artikel
+WHERE id_artikel = 3;
