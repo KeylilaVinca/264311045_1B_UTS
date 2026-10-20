@@ -1,0 +1,33 @@
+CREATE TABLE kategori (
+    id_kategori   INT AUTO_INCREMENT,
+    nama_kategori VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_kategori),
+    UNIQUE KEY uq_nama_kategori (nama_kategori)
+) ENGINE=InnoDB;
+ 
+CREATE TABLE users (
+    id_user      INT AUTO_INCREMENT,
+    nama_lengkap VARCHAR(100) NOT NULL,
+    email        VARCHAR(100) NOT NULL,
+    role         ENUM('admin', 'editor', 'reporter') NOT NULL DEFAULT 'reporter',
+    PRIMARY KEY (id_user),
+    UNIQUE KEY uq_email (email)
+) ENGINE=InnoDB;
+ 
+CREATE TABLE artikel (
+    id_artikel     INT AUTO_INCREMENT,
+    judul          VARCHAR(200) NOT NULL,
+    isi            TEXT NOT NULL,
+    status         ENUM('draft', 'terbit', 'arsip') NOT NULL DEFAULT 'draft',
+    jumlah_view    INT NOT NULL DEFAULT 0,
+    tanggal_terbit DATE NULL,
+    id_kategori    INT NOT NULL,
+    id_user        INT NOT NULL,
+    PRIMARY KEY (id_artikel),
+    CONSTRAINT fk_artikel_kategori
+        FOREIGN KEY (id_kategori) REFERENCES kategori (id_kategori)
+        ON UPDATE CASCADE ON DELETE RESTRICT,
+    CONSTRAINT fk_artikel_users
+        FOREIGN KEY (id_user) REFERENCES users (id_user)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=InnoDB;
